@@ -9,6 +9,7 @@ After that, it's the next player's turn
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. 
 After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
+- With adding a function of setting up final score, Players can set score by their own, if they didn't do it, the final score will be 100
 
 */
 
@@ -47,9 +48,20 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
 	// Update the UI
 	document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+	// Setting up the final score by players
+	var input = document.querySelector('.final-score').value;
+	var winningScore;
 	
+	if (input) {
+	winningScore = input;
+	} else {
+	winningScore = 100;
+	}
+
+
 	// Check IF player won the game
-	if (scores[activePlayer] >= 100) {
+	if (scores[activePlayer] >= winningScore) {
 		document.getElementById('name-' + activePlayer).textContent = 'Winner!';
 		document.querySelector('.dice').style.display = 'none';
 		document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
